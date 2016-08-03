@@ -50,7 +50,7 @@ Execute the command `Redis: Reload Configuration` to load the servers listed in 
 
 ## Release Notes
 
-### 1.0.1
+### 1.0.0
 Initial release of **vscode-redis**
 
 ### 1.0.1
