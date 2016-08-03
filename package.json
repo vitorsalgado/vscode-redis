@@ -1,0 +1,90 @@
+{
+  "name": "vscode-redis",
+  "displayName": "vscode-redis",
+  "description": "Allows execution of Redis commands on Visual Studio Code command palette",
+  "version": "1.0.0",
+  "publisher": "vitorsalgado",
+  "icon": "icon.png",
+  "keywords": [
+    "redis",
+    "nosql"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/vitorsalgado/vscode-redis",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vitorsalgado/vscode-redis"
+  },
+  "bugs": {
+    "email": "vsalgadopb@gmail.com",
+    "url": "https://github.com/vitorsalgado/vscode-redis/issues"
+  },
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./src/extension",
+  "contributes": {
+    "configuration": {
+      "title": "Configure multiple servers on workspace"
+    },
+    "commands": [
+      {
+        "command": "extension.redis.reloadConfiguration",
+        "title": "Reload Configuration",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.newConnection",
+        "title": "New Connection",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.connect",
+        "title": "Connect",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.changeServer",
+        "title": "Change Connection",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.info",
+        "title": "info | stats",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.get",
+        "title": "get",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.set",
+        "title": "set",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.hgetall",
+        "title": "hgetall",
+        "category": "Redis"
+      }
+    ]
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "vscode": "^0.11.0"
+  },
+  "dependencies": {
+    "fs": "0.0.2",
+    "path": "^0.12.7",
+    "redis": "^2.6.2"
+  }
+}
