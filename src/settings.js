@@ -5,16 +5,15 @@ const fs = require('fs')
     , vscode = require('vscode')
     , file = '/.vscode/redis.json';
 
-let defaults = {}
-    , settings = {};
+let defaults = {};
 
 defaults.databases = [{
     name: 'local',
     url: 'localhost:6379'
 }];
 
-let load = () => {
-    return new Promise((resolve, reject) => {
+let load = () => 
+    new Promise((resolve, reject) => {
         let root = vscode.workspace.rootPath;
         if (!root) {
             return resolve(defaults);
@@ -42,10 +41,9 @@ let load = () => {
             });
         });
     });
-};
 
-let save = (servers) => {
-    return new Promise((resolve, reject) => {
+let save = (servers) => 
+    new Promise((resolve, reject) => {
         if (!Array.isArray(servers)) {
             return reject('invalid array provided');
         }
@@ -93,7 +91,6 @@ let save = (servers) => {
             });
         });
     });
-};
 
 exports.load = load;
 exports.save = save;

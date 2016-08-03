@@ -8,8 +8,8 @@ const vscode = require('vscode')
 
 let client = null;
 
-exports.get = () => {
-    return new Promise((resolve, reject) => {
+exports.get = () => 
+    new Promise((resolve, reject) => {
         if (!client) {
             msg.warn('no active redis connection... use "new connection" command to create a new one');
             return reject();
@@ -17,7 +17,6 @@ exports.get = () => {
 
         return resolve(client);
     });
-};
 
 exports.connect = (server) => {
     client = redis.createClient(server.url);
