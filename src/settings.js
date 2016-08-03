@@ -9,7 +9,7 @@ let defaults = {};
 
 defaults.databases = [{
     name: 'local',
-    url: 'localhost:6379'
+    url: 'redis://localhost:6379'
 }];
 
 let load = () => 
