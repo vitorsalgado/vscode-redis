@@ -16,8 +16,8 @@ let init = () => {
         .catch(err => msg.error(err));
 };
 
-let newConnection = () => {
-    prompt.safeInput('redis://localhost:6379', 'e.g. redis://localhost:6379', 'server address').then(addr => {
+let newConnection = () => 
+    prompt.safeInput('redis://localhost:6379', 'e.g. redis://localhost:6379', 'server address').then(addr => 
         prompt.safeInput('local', 'e.g. qa redis', 'connection alias').then(name => {
             let server = { name: name, url: addr };
             let changed = false;
@@ -35,9 +35,7 @@ let newConnection = () => {
 
             settings.save(servers).catch((err) => msg.error(err));
             connect(server);
-        });
-    });
-};
+        }));
 
 let connect = (server) => redisClient.connect(server)
 
