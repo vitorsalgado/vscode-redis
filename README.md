@@ -1,5 +1,7 @@
 # VS Code Redis
 ### Extension for Visual Studio Code 
+[![Build Status](https://travis-ci.org/vitorsalgado/vscode-redis.svg?branch=master)](https://travis-ci.org/vitorsalgado/vscode-redis)
+
 This extension allows execution of Redis commands directly from Command Palette
 
 ## Install
