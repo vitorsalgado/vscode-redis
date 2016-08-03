@@ -1,43 +1,35 @@
-"use strict";
+'use strict';
 
 const vscode = require('vscode')
     , settings = require('./settings')
-    , redis = require('redis')
+    , prompt = require('./prompt')
+    , redisClient = require('./redis_client')
+    , consts = require('./consts')
     , msg = require('./message_handler');
 
-let client = null
-    , currentServer = null
-    , servers = [];
+let servers = [];
 
 let init = () => {
     settings.load()
-        .then(config => {
-            config.databases.forEach(database => { 
-                servers.push({name: database.name, url: database.url});
-            });
-        })
-        .catch((err) => msg.error(err));
+        .then(config =>
+            config.databases.forEach(database => servers.push({ name: database.name, url: database.url })))
+        .catch(err => msg.error(err));
 };
 
 let newConnection = () => {
-    vscode.window.showInputBox({value: 'http://localhost:6379', prompt: 'e.g. http://localhost:6379', placeHolder: "Server Url"}).then((input) => {
-        let addr = input ? input : 'http://localhost:6379';
-        
-        vscode.window.showInputBox({value: '', prompt: "e.g. production redis", placeHolder: "Connection name"}).then((input) => {
-            let name = input ? input : 'local';
+    prompt.safeInput('redis://localhost:6379', 'e.g. redis://localhost:6379', 'server address').then(addr => {
+        prompt.safeInput('local', 'e.g. qa redis', 'connection alias').then(name => {
             let server = { name: name, url: addr };
-            let added = false;
+            let changed = false;
 
             servers.forEach((element, index) => {
                 if (element.name == name) {
                     servers[index] = server;
-                    added = true;
-
-                    return;
+                    changed = true;
                 }
             });
 
-            if (!added) {
+            if (!changed) {
                 servers.push(server);
             }
 
@@ -47,75 +39,67 @@ let newConnection = () => {
     });
 };
 
-let connect = (server) => {
-    client = redis.createClient(server.url);
-    currentServer = server;
+let connect = (server) => redisClient.connect(server)
 
-    client.on('error', msg.error);
-    client.on('ready', () => {
-        msg.info(`Redis connection "${server.name}" ready on "${server.url}"`);
-        msg.showStatusBarMessage(`redis > ${server.url}`, server.name);
-    });
-};
+let changeServer = () => 
+    servers.length == 0
+        ? newConnection()
+        : prompt.strictPick(servers.map(x => x.name), 'choose redis connection').then(choice => 
+            connect(servers.find(x => x.name == choice)));
 
-let changeServer = () => {
-    vscode.window.showQuickPick(servers.map(x => x.name), {matchOnDescription: false, placeHolder: "Choose Redis connection"}).then((choice) => {
-        if (choice) {
-            connect(servers.find(x => x.name == choice));
-        }
-    });
-};
+let help = () => msg.showMessageOnConsole(consts.help);
 
-let redisClient = () => {
-    return new Promise((resolve, reject) => {
-        if (!client) {
-            msg.warn('no active redis connection... use "new connection" command to create a new one');
-            return reject();
-        }
+let execute = () => 
+    prompt.strictInput('provide the command', 'command').then(input => 
+        redisClient.get().then(c => c.send_command(input, (err, reply) => redisClient.handleStr(err, input, reply))));
 
-        return resolve(client);
-    });
-};
+let info = () => 
+    redisClient.get().then(c => c.send_command('info', (err, reply) => redisClient.handleStr(err, 'INFO', reply)));
 
-let info = () => redisClient().then(c => c.send_command('info', (err, reply) => msg.outputString(err, 'INFO', reply)));
+let get = () => 
+    prompt.strictInput('provide key', 'key').then(input => 
+        redisClient.get().then(c => c.get(input, (err, reply) => redisClient.handleStr(err, `GET:${input}`, reply))));
 
-let get = () => {
-    vscode.window.showInputBox({value: '', prompt: 'provide key', placeHolder: 'key'}).then(input => {
-        if (!input) {
-            return;
-        }        
+let set = () => 
+    prompt.strictInput('provide key', 'key').then(key => 
+        prompt.safeInput('', 'provide value', 'value').then(value =>
+            redisClient.get().then(c => c.set(key, value, (err, reply) => redisClient.handleStr(err, 'SET', `key: ${key} | value: ${value}`)))));
 
-        redisClient().then(c => c.get(input, (err, reply) => msg.outputString(err, `GET:${input}`, reply)));
-    });
-};
+let hset = () =>
+    prompt.strictInput('provide hash key', 'key').then(key =>
+        prompt.strictInput('provide field name', 'field').then(field =>
+            prompt.safeInput('', 'provide field value', 'value' ).then(value => 
+                redisClient.get().then(c => c.hset(key, field, value, (err, reply) => redisClient.handleStr(err, 'HSET', `hash: ${key} | field: ${field} value: ${value}`))))));
 
-let set = () => {
-    vscode.window.showInputBox({value: '', prompt: 'provide key', placeHolder: 'key'}).then(key => {
-        if (!key) {
-            return;
-        }
+let hget = () => 
+    prompt.strictInput('provide hash key', 'key').then(key => 
+        prompt.strictInput('provide field name', 'field').then(field =>
+            redisClient.get().then(c => c.hget(key, field, (err, reply) => redisClient.handleStr(err, `HGET:${key}:${field}`, reply)))));
 
-        vscode.window.showInputBox({value: '', prompt: 'provide value', placeHolder: 'value'}).then(value => {
-            redisClient().then(c => c.set(key, value, (err, reply) => msg.outputString(err, 'SET', `key: ${key} | value: ${value}`)));
-        });
-    });    
-}
+let del = () => 
+    prompt.strictInput('provide key to be removed', 'key').then(input =>
+        redisClient.get().then(c => c.del(key, (err, reply) => redisClient.handleStr(err, 'DEL', input))));
 
-let hgetall = () => {
-    vscode.window.showInputBox({value: '', prompt: 'provide hash key', placeHolder: 'hash key'}).then(input => {
-        if (!input) {
-            return;
-        }
+let del_hash = () => 
+    prompt.strictInput('provide hash key', 'key' ).then(key =>
+        prompt.strictInput('provide field name to be removed', 'field').then(field => 
+            redisClient.get().then(c => c.hdel(key, field, (err, reply) => redisClient.handleStr(err, 'HDEL', `hash: ${key} | field: ${field}`)))));
 
-        redisClient().then(c => c.hgetall(input, (err, reply) => msg.outputObject(err, `HGETALL:${input}`, reply)));
-    });
-};
+let hgetall = () => 
+    prompt.strictInput('provide hash key', 'hash key').then(input => 
+        redisClient.get().then(c => c.hgetall(input, (err, reply) => redisClient.handleObj(err, `HGETALL:${input}`, reply))));
 
 exports.init = init;
 exports.newConnection = newConnection;
 exports.changeServer = changeServer;
+exports.execute = execute;
+exports.help = help;
 
 exports.info = info;
 exports.get = get;
 exports.set = set;
+exports.hget = hget;
+exports.hset = hset;
+exports.del = del;
+exports.del_hash = del_hash;
 exports.hgetall = hgetall;

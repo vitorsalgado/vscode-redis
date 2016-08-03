@@ -7,7 +7,9 @@
   "icon": "icon.png",
   "keywords": [
     "redis",
-    "nosql"
+    "nosql",
+    "command",
+    "database"
   ],
   "license": "MIT",
   "homepage": "https://github.com/vitorsalgado/vscode-redis",
@@ -50,29 +52,64 @@
         "category": "Redis"
       },
       {
-        "command": "extension.redis.changeServer",
-        "title": "Change Connection",
+        "command": "extension.redis.execute",
+        "title": "Execute Command",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.help",
+        "title": "HELP",
         "category": "Redis"
       },
       {
         "command": "extension.redis.info",
-        "title": "info | stats",
+        "title": "INFO | STATS",
         "category": "Redis"
       },
       {
         "command": "extension.redis.get",
-        "title": "get",
+        "title": "GET",
         "category": "Redis"
       },
       {
         "command": "extension.redis.set",
-        "title": "set",
+        "title": "SET",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.hget",
+        "title": "HGET",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.hset",
+        "title": "HSET",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.del",
+        "title": "DEL",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.hdel",
+        "title": "HDEL",
         "category": "Redis"
       },
       {
         "command": "extension.redis.hgetall",
-        "title": "hgetall",
+        "title": "HGETALL",
         "category": "Redis"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.redis.hgetall",
+        "key": "Shift+G A"
+      },
+      {
+        "command": "extension.redis.connect",
+        "key": "Shift+N R"
       }
     ]
   },

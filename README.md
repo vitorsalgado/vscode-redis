@@ -13,11 +13,15 @@ This extension allows execution of Redis commands directly from Command Palette
 
 * Multiple Redis connections;
 * Switch between server connections;
-* Execute any Redis command with `Redis: Cmd | Command`
+* Execute any Redis command with `Redis: Execute Command`
 * "Command Palette" supported Redis commands:
     * `info`
     * `get`
     * `set`
+    * `hget`
+    * `hset`
+    * `del`
+    * `hdel`
     * `hgetall`
 
 ## Optional Extension Settings

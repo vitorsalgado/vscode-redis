@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const fs = require('fs')
     , path = require('path')
@@ -10,7 +10,7 @@ let defaults = {}
 
 defaults.databases = [{
     name: 'local',
-    url: 'http://localhost:6379'
+    url: 'localhost:6379'
 }];
 
 let load = () => {
@@ -39,7 +39,7 @@ let load = () => {
                 }
 
                 return resolve(config);
-            }); 
+            });
         });
     });
 };
@@ -56,10 +56,10 @@ let save = (servers) => {
         }
 
         let settingsPath = path.join(root, '/.vscode/');
-        let settingsFile = path.join(root, file); 
+        let settingsFile = path.join(root, file);
 
         fs.exists(settingsPath, (exists) => {
-            if (!exists) 
+            if (!exists)
                 fs.mkdirSync(settingsPath);
 
             fs.exists(settingsFile, (exists) => {
@@ -91,7 +91,7 @@ let save = (servers) => {
                     });
                 });
             });
-        }); 
+        });
     });
 };
 
