@@ -2,7 +2,7 @@
   "name": "vscode-redis",
   "displayName": "vscode-redis",
   "description": "Execute Redis commands on VS Code command palette",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "vitorsalgado",
   "icon": "icon.png",
   "keywords": [
