@@ -9,12 +9,11 @@ const vscode = require('vscode')
 
 let servers = [];
 
-let init = () => {
+let init = () => 
     settings.load()
         .then(config =>
             config.databases.forEach(database => servers.push({ name: database.name, url: database.url })))
         .catch(err => msg.error(err));
-};
 
 let newConnection = () => 
     prompt.safeInput('redis://localhost:6379', 'e.g. redis://localhost:6379', 'server address').then(addr => 
