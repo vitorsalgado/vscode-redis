@@ -54,8 +54,10 @@ Execute the command `Redis: Reload Configuration` to load the servers listed in 
 ### 1.0.0
 Initial release of **vscode-redis**
 
-### 1.0.1
-Fixed default server configuration url
+### 1.0.2
+Fixed default server configuration url;
+Display name;
+Readme.
 
 ## License
 MIT © [vitorsalgado](https://github.com/vitorsalgado)
