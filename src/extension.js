@@ -20,6 +20,7 @@ let activate = (context) => {
     addCommand(context, 'extension.redis.del', manager.del);
     addCommand(context, 'extension.redis.hdel', manager.hdel);
     addCommand(context, 'extension.redis.hgetall', manager.hgetall);
+    addCommand(context, 'extension.redis.end', manager.end);
 }
 
 let deactivate = () => { };

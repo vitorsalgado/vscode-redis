@@ -11,7 +11,7 @@ let client = null;
 exports.get = () => 
     new Promise((resolve, reject) => {
         if (!client) {
-            msg.warn('no active redis connection... use "new connection" command to create a new one');
+            msg.warn('no active redis connection... Use "Connect" or "New Command" commands to start a new one');
             return reject();
         }
 
@@ -19,14 +19,55 @@ exports.get = () =>
     });
 
 exports.connect = (server) => {
-    client = redis.createClient(server.url);
+    if (client)
+        client.end(true);
 
-    client.on('error', msg.error);
+    client = redis.createClient(server.url, {
+        retry_strategy: (options) => {
+            if (options.error && options.error.code === 'ECONNREFUSED') {
+                const message = 'the server refused the connection';
+                
+                msg.error(message);
+
+                return new Error(message);
+            }
+
+            if (options.total_retry_time > 3000) {
+                const message = 'retry time exhausted';
+
+                msg.error(message);
+
+                return new Error(message);
+            }
+
+            if (options.times_connected > 3) {
+                return undefined;
+            }
+
+            return Math.max(options.attempt * 100, 3000);
+        }
+    });
+    
+    client.on('error', (error) => {
+        if (error)
+            msg.error(error);
+    });
+
     client.on('ready', () => {
-        msg.info(`Redis connection "${server.name}" ready on "${server.url}"`);
+        msg.info(`Redis client "${server.name}" connected on address "${server.url}"`);
         msg.showStatusBarMessage(`redis > ${server.url}`, server.name);
     });
+
+    client.on('reconnecting', () => 
+        msg.showStatusBarMessage(`redis > reconnecting to ${server.url} ...`, server.name));        
 };
+
+exports.close = () => {
+    if (client) {
+        client.end(true);
+        client = null;
+    }
+}
 
 exports.handleStr = (error, command, message) => {
     if (error)

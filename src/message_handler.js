@@ -6,7 +6,7 @@ const vscode = require('vscode')
 
 exports.info = (message) => vscode.window.showInformationMessage(message);
 exports.warn = (message) => vscode.window.showWarningMessage(message);
-exports.error = (error) => vscode.window.showErrorMessage(`an error ocurred in Redis ... ${error}`);
+exports.error = (error) => vscode.window.showErrorMessage(error);
 
 exports.showStatusBarMessage = (message, tooltip) => {
     statusBar.text = `$(database) ${message}`;

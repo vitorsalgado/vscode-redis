@@ -11,8 +11,10 @@ let servers = [];
 
 let init = () => 
     settings.load()
-        .then(config =>
-            config.databases.forEach(database => servers.push({ name: database.name, url: database.url })))
+        .then(config => {
+            servers = [];
+            config.databases.forEach(database => servers.push({ name: database.name, url: database.url }));
+        })
         .catch(err => msg.error(err));
 
 let newConnection = () => 
@@ -28,11 +30,12 @@ let newConnection = () =>
                 }
             });
 
-            if (!changed) {
+            if (!changed) 
                 servers.push(server);
-            }
 
-            settings.save(servers).catch((err) => msg.error(err));
+            if (addr != 'redis://localhost:6379')
+                settings.save(servers).catch((err) => msg.error(err));
+
             connect(server);
         }));
 
@@ -86,6 +89,13 @@ let hgetall = () =>
     prompt.strictInput('provide hash key', 'hash key').then(input => 
         redisClient.get().then(c => c.hgetall(input, (err, reply) => redisClient.handleObj(err, `HGETALL:${input}`, reply))));
 
+let end = () => {
+    redisClient.close();
+
+    msg.info('Redis connection closed');
+    msg.showStatusBarMessage('', '');
+};
+
 exports.init = init;
 exports.newConnection = newConnection;
 exports.changeServer = changeServer;
@@ -100,3 +110,4 @@ exports.hset = hset;
 exports.del = del;
 exports.del_hash = del_hash;
 exports.hgetall = hgetall;
+exports.end = end;

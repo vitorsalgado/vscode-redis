@@ -55,9 +55,11 @@ Execute the command `Redis: Reload Configuration` to load the servers listed in 
 Initial release of **vscode-redis**
 
 ### 1.0.2
-Fixed default server configuration url;
-Display name;
-Readme.
+Small fixes
+
+### 1.1.0
+* Several fixes;
+* Removed key bindings.
 
 ## License
 MIT © [vitorsalgado](https://github.com/vitorsalgado)

@@ -23,7 +23,7 @@ let load = () =>
 
         fs.exists(settingsFile, (exists) => {
             if (!exists) {
-                return save(defaults.databases);
+                return resolve(defaults);
             }
 
             fs.readFile(settingsFile, (err, data) => {
@@ -34,7 +34,7 @@ let load = () =>
                 let config = JSON.parse(data);
 
                 if (!config.databases) {
-                    return save(defaults.databases);
+                    config = defaults;
                 }
 
                 return resolve(config);
