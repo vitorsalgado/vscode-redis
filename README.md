@@ -2,8 +2,10 @@
 ### Extension for Visual Studio Code 
 [![Build Status](https://travis-ci.org/vitorsalgado/vscode-redis.svg?branch=master)](https://travis-ci.org/vitorsalgado/vscode-redis)
 [![Dependency Status](https://david-dm.org/vitorsalgado/vscode-redis.svg)](https://david-dm.org/vitorsalgado/vscode-redis)
+![Version](https://vsmarketplacebadge.apphb.com/version/vitorsalgado.vscode-redis.svg "Marketplace")
+![Installs](https://vsmarketplacebadge.apphb.com/installs/vitorsalgado.vscode-redis.svg "Installs")
 
-This extension allows execution of Redis commands directly from Command Palette
+Adds common Redis commands to VS Code Command Palette
 
 ## Install
 * Press `Ctrl + Shift + P`
@@ -50,16 +52,8 @@ Execute the command `Redis: Reload Configuration` to load the servers listed in 
 ![how use](https://github.com/vitorsalgado/vscode-redis/raw/master/how-to.gif)
 
 ## Release Notes
+https://github.com/vitorsalgado/vscode-redis/blob/master/release-notes.md
 
-### 1.0.0
-Initial release of **vscode-redis**
-
-### 1.0.2
-Small fixes
-
-### 1.1.0
-* Several fixes;
-* Removed key bindings.
 
 ## License
 MIT © [vitorsalgado](https://github.com/vitorsalgado)

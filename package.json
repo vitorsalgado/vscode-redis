@@ -1,10 +1,15 @@
 {
   "name": "vscode-redis",
   "displayName": "VS Code Redis",
-  "description": "Execute Redis commands on VS Code command palette",
-  "version": "1.1.0",
+  "description": "Adds common Redis commands to VS Code Command Palette",
+  "version": "1.1.1",
   "publisher": "vitorsalgado",
   "icon": "icon.png",
+  "author": {
+    "name": "Vitor Hugo Salgado",
+    "email": "vsalgadopb@gmail.com",
+    "url": "https://github.com/vitorsalgado/"
+  },
   "keywords": [
     "redis",
     "nosql",
@@ -112,6 +117,7 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
+    "jscs": "^3.0.7",
     "vscode": "^0.11.0"
   },
   "dependencies": {
