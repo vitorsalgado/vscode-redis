@@ -48,6 +48,15 @@ exports.connect = (server) => {
         }
     });
     
+    if(server.pwd) {
+        client.auth(server.pwd, function (err) {
+            if (err) {
+                msg.error(err);
+
+                return new Error(err);
+            }
+        });
+    }
     client.on('error', (error) => {
         if (error)
             msg.error(error);
