@@ -6,7 +6,7 @@ const vscode = require('vscode')
     , statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left)
     , msg = require('./message_handler');
 
-clilet client = null;
+let client = null;
 
 exports.get = () => 
     new Promise((resolve, reject) => {
