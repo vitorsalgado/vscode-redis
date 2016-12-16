@@ -6,7 +6,7 @@ const vscode = require('vscode')
     , statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left)
     , msg = require('./message_handler');
 
-let client = null;
+clilet client = null;
 
 exports.get = () => 
     new Promise((resolve, reject) => {
@@ -48,6 +48,15 @@ exports.connect = (server) => {
         }
     });
     
+    if(server.pwd) {
+        client.auth(server.pwd, function (err) {
+            if (err) {
+                msg.error(err);
+
+                return new Error(err);
+            }
+        });
+    }
     client.on('error', (error) => {
         if (error)
             msg.error(error);
