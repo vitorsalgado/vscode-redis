@@ -1,14 +1,13 @@
 'use strict';
 
-const vscode = require('vscode')
-    , redis = require('redis')
-    , output = vscode.window.createOutputChannel("Redis")
-    , statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left)
-    , msg = require('./message_handler');
+const vscode = require('vscode');
+const redis = require('redis');
+const output = vscode.window.createOutputChannel("Redis");
+const msg = require('./message_handler');
 
 let client = null;
 
-exports.get = () => 
+exports.get = () =>
     new Promise((resolve, reject) => {
         if (!client) {
             msg.warn('no active redis connection... Use "Connect" or "New Command" commands to start a new one');
@@ -26,7 +25,7 @@ exports.connect = (server) => {
         retry_strategy: (options) => {
             if (options.error && options.error.code === 'ECONNREFUSED') {
                 const message = 'the server refused the connection';
-                
+
                 msg.error(message);
 
                 return new Error(message);
@@ -47,16 +46,16 @@ exports.connect = (server) => {
             return Math.max(options.attempt * 100, 3000);
         }
     });
-    
-    if(server.pwd) { 
-        client.auth(server.pwd, function (err) { 
-            if (err) { 
-                msg.error(err); 
-                return new Error(err); 
-           } 
-       }); 
+
+    if (server.pwd) {
+        client.auth(server.pwd, function (err) {
+            if (err) {
+                msg.error(err);
+                return new Error(err);
+            }
+        });
     }
-    
+
     client.on('error', (error) => {
         if (error)
             msg.error(error);
@@ -67,8 +66,8 @@ exports.connect = (server) => {
         msg.showStatusBarMessage(`redis > ${server.url}`, server.name);
     });
 
-    client.on('reconnecting', () => 
-        msg.showStatusBarMessage(`redis > reconnecting to ${server.url} ...`, server.name));        
+    client.on('reconnecting', () =>
+        msg.showStatusBarMessage(`redis > reconnecting to ${server.url} ...`, server.name));
 };
 
 exports.close = () => {
@@ -76,7 +75,7 @@ exports.close = () => {
         client.end(true);
         client = null;
     }
-}
+};
 
 exports.handleStr = (error, command, message) => {
     if (error)

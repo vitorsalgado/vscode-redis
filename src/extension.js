@@ -1,9 +1,9 @@
 'use strict';
 
-const vscode = require('vscode')
-    , manager = require('./manager');
+const vscode = require('vscode');
+const manager = require('./manager');
 
-let activate = (context) => {
+const activate = (context) => {
     manager.init();
 
     addCommand(context, 'extension.redis.newConnection', manager.newConnection);
@@ -21,11 +21,11 @@ let activate = (context) => {
     addCommand(context, 'extension.redis.hdel', manager.hdel);
     addCommand(context, 'extension.redis.hgetall', manager.hgetall);
     addCommand(context, 'extension.redis.end', manager.end);
-}
+};
 
-let deactivate = () => { };
+const deactivate = () => { };
 
-let addCommand = (context, command, handler) => context.subscriptions.push(
+const addCommand = (context, command, handler) => context.subscriptions.push(
     vscode.commands.registerCommand(command, handler)
 );
 

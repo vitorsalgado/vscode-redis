@@ -1,15 +1,15 @@
 'use strict';
 
-const vscode = require('vscode')
-    , settings = require('./settings')
-    , prompt = require('./prompt')
-    , redisClient = require('./redis_client')
-    , consts = require('./consts')
-    , msg = require('./message_handler');
+const vscode = require('vscode');
+const settings = require('./settings');
+const prompt = require('./prompt');
+const redisClient = require('./redis_client');
+const consts = require('./consts');
+const msg = require('./message_handler');
 
 let servers = [];
 
-let init = () => 
+const init = () =>
     settings.load()
         .then(config => {
             servers = [];
@@ -17,10 +17,10 @@ let init = () =>
         })
         .catch(err => msg.error(err));
 
-let newConnection = () => 
-    prompt.safeInput('redis://localhost:6379', 'e.g. redis://localhost:6379', 'server address').then(addr => 
+const newConnection = () =>
+    prompt.safeInput('redis://localhost:6379', 'e.g. redis://localhost:6379', 'server address').then(addr =>
         prompt.safeInput('local', 'e.g. qa redis', 'connection alias').then(name => {
-            let server = { name: name, url: addr };
+            const server = { name: name, url: addr };
             let changed = false;
 
             servers.forEach((element, index) => {
@@ -30,7 +30,7 @@ let newConnection = () =>
                 }
             });
 
-            if (!changed) 
+            if (!changed)
                 servers.push(server);
 
             if (addr != 'redis://localhost:6379')
@@ -39,57 +39,57 @@ let newConnection = () =>
             connect(server);
         }));
 
-let connect = (server) => redisClient.connect(server)
+const connect = (server) => redisClient.connect(server);
 
-let changeServer = () => 
+const changeServer = () =>
     servers.length == 0
         ? newConnection()
-        : prompt.strictPick(servers.map(x => x.name), 'choose redis connection').then(choice => 
+        : prompt.strictPick(servers.map(x => x.name), 'choose redis connection').then(choice =>
             connect(servers.find(x => x.name == choice)));
 
-let help = () => msg.showMessageOnConsole(consts.help);
+const help = () => msg.showMessageOnConsole(consts.help);
 
-let execute = () => 
-    prompt.strictInput('provide the command', 'command').then(input => 
+const execute = () =>
+    prompt.strictInput('provide the command', 'command').then(input =>
         redisClient.get().then(c => c.send_command(input, (err, reply) => redisClient.handleStr(err, input, reply))));
 
-let info = () => 
+const info = () =>
     redisClient.get().then(c => c.send_command('info', (err, reply) => redisClient.handleStr(err, 'INFO', reply)));
 
-let get = () => 
-    prompt.strictInput('provide key', 'key').then(input => 
+const get = () =>
+    prompt.strictInput('provide key', 'key').then(input =>
         redisClient.get().then(c => c.get(input, (err, reply) => redisClient.handleStr(err, `GET:${input}`, reply))));
 
-let set = () => 
-    prompt.strictInput('provide key', 'key').then(key => 
+const set = () =>
+    prompt.strictInput('provide key', 'key').then(key =>
         prompt.safeInput('', 'provide value', 'value').then(value =>
             redisClient.get().then(c => c.set(key, value, (err, reply) => redisClient.handleStr(err, 'SET', `key: ${key} | value: ${value}`)))));
 
-let hset = () =>
+const hset = () =>
     prompt.strictInput('provide hash key', 'key').then(key =>
         prompt.strictInput('provide field name', 'field').then(field =>
-            prompt.safeInput('', 'provide field value', 'value' ).then(value => 
+            prompt.safeInput('', 'provide field value', 'value').then(value =>
                 redisClient.get().then(c => c.hset(key, field, value, (err, reply) => redisClient.handleStr(err, 'HSET', `hash: ${key} | field: ${field} value: ${value}`))))));
 
-let hget = () => 
-    prompt.strictInput('provide hash key', 'key').then(key => 
+const hget = () =>
+    prompt.strictInput('provide hash key', 'key').then(key =>
         prompt.strictInput('provide field name', 'field').then(field =>
             redisClient.get().then(c => c.hget(key, field, (err, reply) => redisClient.handleStr(err, `HGET:${key}:${field}`, reply)))));
 
-let del = () => 
+const del = () =>
     prompt.strictInput('provide key to be removed', 'key').then(input =>
         redisClient.get().then(c => c.del(key, (err, reply) => redisClient.handleStr(err, 'DEL', input))));
 
-let del_hash = () => 
-    prompt.strictInput('provide hash key', 'key' ).then(key =>
-        prompt.strictInput('provide field name to be removed', 'field').then(field => 
+const del_hash = () =>
+    prompt.strictInput('provide hash key', 'key').then(key =>
+        prompt.strictInput('provide field name to be removed', 'field').then(field =>
             redisClient.get().then(c => c.hdel(key, field, (err, reply) => redisClient.handleStr(err, 'HDEL', `hash: ${key} | field: ${field}`)))));
 
-let hgetall = () => 
-    prompt.strictInput('provide hash key', 'hash key').then(input => 
+const hgetall = () =>
+    prompt.strictInput('provide hash key', 'hash key').then(input =>
         redisClient.get().then(c => c.hgetall(input, (err, reply) => redisClient.handleObj(err, `HGETALL:${input}`, reply))));
 
-let end = () => {
+const end = () => {
     redisClient.close();
 
     msg.info('Redis connection closed');

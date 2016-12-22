@@ -1,8 +1,8 @@
 'use strict';
 
-const vscode = require('vscode')
-    , output = vscode.window.createOutputChannel("Redis")
-    , statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
+const vscode = require('vscode');
+const output = vscode.window.createOutputChannel("Redis");
+const statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
 
 exports.info = (message) => vscode.window.showInformationMessage(message);
 exports.warn = (message) => vscode.window.showWarningMessage(message);

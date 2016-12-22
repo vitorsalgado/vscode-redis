@@ -5,21 +5,21 @@ const fs = require('fs')
     , vscode = require('vscode')
     , file = '/.vscode/redis.json';
 
-let defaults = {};
+const defaults = {};
 
 defaults.databases = [{
     name: 'local',
     url: 'redis://localhost:6379'
 }];
 
-let load = () => 
+const load = () =>
     new Promise((resolve, reject) => {
-        let root = vscode.workspace.rootPath;
+        const root = vscode.workspace.rootPath;
         if (!root) {
             return resolve(defaults);
         }
 
-        let settingsFile = path.join(root, file);
+        const settingsFile = path.join(root, file);
 
         fs.exists(settingsFile, (exists) => {
             if (!exists) {
@@ -42,19 +42,19 @@ let load = () =>
         });
     });
 
-let save = (servers) => 
+const save = (servers) =>
     new Promise((resolve, reject) => {
         if (!Array.isArray(servers)) {
             return reject('invalid array provided');
         }
 
-        let root = vscode.workspace.rootPath;
+        const root = vscode.workspace.rootPath;
         if (!root) {
             return reject(`workspace root path not available`);
         }
 
-        let settingsPath = path.join(root, '/.vscode/');
-        let settingsFile = path.join(root, file);
+        const settingsPath = path.join(root, '/.vscode/');
+        const settingsFile = path.join(root, file);
 
         fs.exists(settingsPath, (exists) => {
             if (!exists)
@@ -69,7 +69,7 @@ let save = (servers) =>
                         return reject(`failed to read file ${settingsFile}`);
                     }
 
-                    let config = JSON.parse(data);
+                    const config = JSON.parse(data);
 
                     if (!config.databases) {
                         config.databases = [];

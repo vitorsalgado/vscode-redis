@@ -40,7 +40,8 @@ First, place a file named "redis.json" in .vscode folder. Open "redis.json" and 
         },
         {
             "name": "production",
-            "addr": "http://production-address:9091"
+            "addr": "http://production-address:9091",
+            "pwd": "super_secret_password"
         }
     ]
 }
@@ -53,7 +54,6 @@ Execute the command `Redis: Reload Configuration` to load the servers listed in 
 
 ## Release Notes
 https://github.com/vitorsalgado/vscode-redis/blob/master/release-notes.md
-
 
 ## License
 MIT © [vitorsalgado](https://github.com/vitorsalgado)
