@@ -2,7 +2,7 @@
   "name": "vscode-redis",
   "displayName": "VS Code Redis",
   "description": "Adds common Redis commands to VS Code Command Palette",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "publisher": "vitorsalgado",
   "icon": "icon.png",
   "author": {
