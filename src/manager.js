@@ -96,6 +96,33 @@ const end = () => {
     msg.showStatusBarMessage('', '');
 };
 
+const llen = () =>
+    prompt.strictInput('provide list key', 'key').then(key =>
+        redisClient.get().then(c => c.llen(key, (err, reply) => redisClient.handleStr(err, `LLEN:${key}`, reply))));
+
+const lpush = () =>
+    prompt.strictInput('provide list name', 'list').then(list =>
+        prompt.strictInput('provide value', 'value').then(value =>
+            redisClient.get().then(c => c.lpush(list, value, (err, reply) => redisClient.handleStr(err, `LPUSH:${list} '${value}'`, reply)))));
+
+const lindex = () =>
+    prompt.strictInput('provide list name', 'list').then(list =>
+        prompt.strictInput('provide index', 'index').then(index =>
+            redisClient.get().then(c => c.lindex(list, index, (err, reply) => redisClient.handleStr(err, `LINDEX:${list}[${index}]`, reply)))));
+
+const linsert = () =>
+    prompt.strictInput('provide list name', 'list').then(list =>
+        prompt.strictPick(['Before', 'After'], 'before or after value').then(position =>
+            prompt.strictInput('provide pivot', 'pivot').then(pivot =>
+                prompt.strictInput('provide value', 'value').then(value =>
+                    redisClient.get().then(c => c.linsert(list, position, pivot, value, (err, reply) => redisClient.handleStr(err, `LINSERT:${list} ${position} ${pivot} '${value}'`, reply)))))));
+
+const lrange = () =>
+    prompt.strictInput('provide list name', 'list').then(list =>
+        prompt.safeInput('0', 'provide start index', 'start').then(start =>
+                prompt.safeInput('-1', 'provide end index', 'end').then(end =>
+                    redisClient.get().then(c => c.lrange(list, start, end, (err, reply) => redisClient.handleStr(err, `LRANGE:${list}[${start} - ${end}]'`, reply))))));
+
 exports.init = init;
 exports.newConnection = newConnection;
 exports.changeServer = changeServer;
@@ -111,3 +138,9 @@ exports.del = del;
 exports.del_hash = del_hash;
 exports.hgetall = hgetall;
 exports.end = end;
+
+exports.llen = llen;
+exports.lpush = lpush;
+exports.lindex = lindex;
+exports.linsert = linsert;
+exports.lrange = lrange;

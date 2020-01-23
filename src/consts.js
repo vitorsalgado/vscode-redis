@@ -12,4 +12,9 @@ HSET > Sets field in the hash stored at key to value. If key does not exist, a n
 DEL > Delete a key \n
 HDEL > Removes the specified field from the hash stored at key \n
 HGETALL > Returns all fields and values of the hash stored at key \n
+LLEN > Gets the length of the list \n
+LPUSH > Adds the value to the list \n
+LINDEX > Gets the value from the list at the given index \n
+LINSERT > inserts the value before or after the given value in the list \n
+LRANGE > displays the values from the list betwnn the start and end indexes \n
 `;

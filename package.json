@@ -115,6 +115,31 @@
         "command": "extension.redis.end",
         "title": "Close | End",
         "category": "Redis"
+      },
+      {
+        "command": "extension.redis.llen",
+        "title": "LLEN",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.lpush",
+        "title": "LPUSH",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.lindex",
+        "title": "LINDEX",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.linsert",
+        "title": "LINSERT",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.lrange",
+        "title": "LRANGE",
+        "category": "Redis"
       }
     ]
   },
