@@ -105,6 +105,21 @@ const lpush = () =>
         prompt.strictInput('provide value', 'value').then(value =>
             redisClient.get().then(c => c.lpush(list, value, (err, reply) => redisClient.handleStr(err, `LPUSH:${list} '${value}'`, reply)))));
 
+const lpushx = () =>
+    prompt.strictInput('provide list name', 'list').then(list =>
+        prompt.strictInput('provide value', 'value').then(value =>
+            redisClient.get().then(c => c.lpushx(list, value, (err, reply) => redisClient.handleStr(err, `LPUSH:${list} '${value}'`, reply)))));
+
+const rpush = () =>
+    prompt.strictInput('provide list name', 'list').then(list =>
+        prompt.strictInput('provide value', 'value').then(value =>
+            redisClient.get().then(c => c.rpush(list, value, (err, reply) => redisClient.handleStr(err, `RPUSH:${list} '${value}'`, reply)))));
+
+const rpushx = () =>
+    prompt.strictInput('provide list name', 'list').then(list =>
+        prompt.strictInput('provide value', 'value').then(value =>
+            redisClient.get().then(c => c.rpushx(list, value, (err, reply) => redisClient.handleStr(err, `RPUSH:${list} '${value}'`, reply)))));
+
 const lindex = () =>
     prompt.strictInput('provide list name', 'list').then(list =>
         prompt.strictInput('provide index', 'index').then(index =>
@@ -122,6 +137,27 @@ const lrange = () =>
         prompt.safeInput('0', 'provide start index', 'start').then(start =>
                 prompt.safeInput('-1', 'provide end index', 'end').then(end =>
                     redisClient.get().then(c => c.lrange(list, start, end, (err, reply) => redisClient.handleStr(err, `LRANGE:${list}[${start} - ${end}]'`, reply))))));
+
+const lpop = () =>
+    prompt.strictInput('provide list name', 'list').then(list =>
+        redisClient.get().then(c => c.lpop(list, (err, reply) => redisClient.handleStr(err, `LPOP:${list}`, reply))));
+
+const rpop = () =>
+    prompt.strictInput('provide list name', 'list').then(list =>
+        redisClient.get().then(c => c.rpop(list, (err, reply) => redisClient.handleStr(err, `RPOP:${list}`, reply))));
+
+const lset = () =>
+    prompt.strictInput('provide list name', 'list').then(list =>
+        prompt.strictInput('provide index', 'index').then(index =>
+                prompt.strictInput('provide value', 'value').then(value =>
+                    redisClient.get().then(c => c.lset(list, index, value, (err, reply) => redisClient.handleStr(err, `LSET:${list}[${index}]'`, reply))))));
+
+const ltrim = () =>
+    prompt.strictInput('provide list name', 'list').then(list =>
+        prompt.safeInput('0', 'provide start index', 'start').then(start =>
+                prompt.safeInput('-1', 'provide end index', 'end').then(end =>
+                    redisClient.get().then(c => c.ltrim(list, start, end, (err, reply) => redisClient.handleStr(err, `LTRIM:${list}[${start} - ${end}]'`, reply))))));
+
 
 exports.init = init;
 exports.newConnection = newConnection;
@@ -141,6 +177,13 @@ exports.end = end;
 
 exports.llen = llen;
 exports.lpush = lpush;
+exports.rpush = rpush;
+exports.lpushx = lpushx;
+exports.rpushx = rpushx;
 exports.lindex = lindex;
 exports.linsert = linsert;
 exports.lrange = lrange;
+exports.lpop = lpop;
+exports.rpop = rpop;
+exports.lset = lset;
+exports.ltrim = ltrim;
