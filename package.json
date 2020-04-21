@@ -115,7 +115,68 @@
         "command": "extension.redis.end",
         "title": "Close | End",
         "category": "Redis"
+      },
+      {
+        "command": "extension.redis.llen",
+        "title": "LLEN",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.lpush",
+        "title": "LPUSH",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.rpush",
+        "title": "RPUSH",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.lpushx",
+        "title": "LPUSHX",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.rpushx",
+        "title": "RPUSHX",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.lindex",
+        "title": "LINDEX",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.linsert",
+        "title": "LINSERT",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.lrange",
+        "title": "LRANGE",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.lpop",
+        "title": "LPOP",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.rpop",
+        "title": "RPOP",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.lset",
+        "title": "LSET",
+        "category": "Redis"
+      },
+      {
+        "command": "extension.redis.ltrim",
+        "title": "LTRIM",
+        "category": "Redis"
       }
+
     ]
   },
   "scripts": {

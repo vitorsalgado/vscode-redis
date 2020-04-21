@@ -21,6 +21,19 @@ const activate = (context) => {
     addCommand(context, 'extension.redis.hdel', manager.hdel);
     addCommand(context, 'extension.redis.hgetall', manager.hgetall);
     addCommand(context, 'extension.redis.end', manager.end);
+
+    addCommand(context, 'extension.redis.llen', manager.llen);
+    addCommand(context, 'extension.redis.lpush', manager.lpush);
+    addCommand(context, 'extension.redis.rpush', manager.rpush);
+    addCommand(context, 'extension.redis.lpushx', manager.lpushx);
+    addCommand(context, 'extension.redis.rpushx', manager.rpushx);
+    addCommand(context, 'extension.redis.lindex', manager.lindex);
+    addCommand(context, 'extension.redis.linsert', manager.linsert);
+    addCommand(context, 'extension.redis.lrange', manager.lrange);
+    addCommand(context, 'extension.redis.lpop', manager.lpop);
+    addCommand(context, 'extension.redis.rpop', manager.rpop);
+    addCommand(context, 'extension.redis.lset', manager.lset);
+    addCommand(context, 'extension.redis.ltrim', manager.ltrim);
 };
 
 const deactivate = () => { };

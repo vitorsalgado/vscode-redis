@@ -26,6 +26,18 @@ Adds common Redis commands to VS Code Command Palette
     * `del`
     * `hdel`
     * `hgetall`
+    * `llen`
+    * `lpush`
+    * `lpushx`
+    * `rpush`
+    * `rpushx`
+    * `lindex`
+    * `linsert`
+    * `lrange`
+    * `lpop`
+    * `rpop`
+    * `lset`
+    * `ltrim`
 
 ## Optional Extension Settings
 
