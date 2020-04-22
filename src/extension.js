@@ -3,7 +3,7 @@
 const VsCode = require('vscode')
 const Commands = require('./commands')
 
-exports.activate = context => {
+module.exports.activate = context => {
   Commands.init()
 
   addCommand(context, 'extension.redis.newConnection', Commands.newConnection)
@@ -36,7 +36,7 @@ exports.activate = context => {
   addCommand(context, 'extension.redis.ltrim', Commands.ltrim)
 }
 
-exports.deactivate = () => { }
+module.exports.deactivate = () => { }
 
 const addCommand = (context, command, handler) =>
   context.subscriptions.push(VsCode.commands.registerCommand(command, handler))

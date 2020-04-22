@@ -1,4 +1,4 @@
-exports.help =
+module.exports.help =
   'VS Code Redis' + '\n' +
   'Available Commands:' + '\n' +
   '---' + '\n' +

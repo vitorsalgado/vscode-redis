@@ -4,23 +4,23 @@ const VsCode = require('vscode')
 const OutChannel = VsCode.window.createOutputChannel('VS Code Redis')
 const StatusBar = VsCode.window.createStatusBarItem(VsCode.StatusBarAlignment.Left)
 
-exports.info = message => VsCode.window.showInformationMessage(message)
-exports.warn = message => VsCode.window.showWarningMessage(message)
-exports.error = error => VsCode.window.showErrorMessage(error)
+module.exports.info = message => VsCode.window.showInformationMessage(message)
+module.exports.warn = message => VsCode.window.showWarningMessage(message)
+module.exports.error = error => VsCode.window.showErrorMessage(error)
 
-exports.showStatusBarMessage = (message, tooltip) => {
+module.exports.showStatusBarMessage = (message, tooltip) => {
   StatusBar.text = message
   StatusBar.tooltip = tooltip
   StatusBar.show()
 }
 
-exports.showMessageOnConsole = message => {
+module.exports.showMessageOnConsole = message => {
   OutChannel.appendLine(message)
   OutChannel.appendLine('')
   OutChannel.show()
 }
 
-exports.showErrorOnConsole = error => {
+module.exports.showErrorOnConsole = error => {
   OutChannel.appendLine('An Error Occurred:')
   OutChannel.appendLine(error)
   OutChannel.appendLine('')

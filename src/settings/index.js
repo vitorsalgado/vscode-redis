@@ -4,7 +4,7 @@ const VsCode = require('vscode')
 const RedisSettingsFile = '/.vscode/redis.json'
 const DefaultSettings = require('./settings.default')
 
-exports.load = () => {
+module.exports.load = () => {
   const root = VsCode.workspace.workspaceFolders ? VsCode.workspace.workspaceFolders[0] : undefined
 
   if (!root) {
@@ -28,7 +28,7 @@ exports.load = () => {
   return settings
 }
 
-exports.save = servers => {
+module.exports.save = servers => {
   if (!Array.isArray(servers)) {
     throw new Error('Parameter servers must be a array')
   }

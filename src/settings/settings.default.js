@@ -1,4 +1,4 @@
-exports = {
+module.exports = ({
   databases: [
     {
       name: 'local',
@@ -6,4 +6,4 @@ exports = {
       password: '123'
     }
   ]
-}
+})

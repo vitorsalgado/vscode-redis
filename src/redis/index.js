@@ -7,7 +7,7 @@ const MessageHandler = require('../message_handler')
 
 let client = null
 
-exports.get = () =>
+module.exports.get = () =>
   new Promise((resolve, reject) => {
     if (!client) {
       return reject(new Error('No active redis connection... Use "Connect" or "New Command" commands to start a new one'))
@@ -16,7 +16,7 @@ exports.get = () =>
     return resolve(client)
   })
 
-exports.connect = server => {
+module.exports.connect = server => {
   if (client) {
     client.end(true)
   }
@@ -72,14 +72,14 @@ exports.connect = server => {
     MessageHandler.showStatusBarMessage(`Redis: reconnecting to ${server.url} ...`, server.name))
 }
 
-exports.close = () => {
+module.exports.close = () => {
   if (client) {
     client.end(true)
     client = null
   }
 }
 
-exports.handleStr = (error, command, reply) => {
+module.exports.handleStr = (error, command, reply) => {
   if (error) {
     return MessageHandler.showErrorOnConsole(error)
   }
@@ -90,7 +90,7 @@ exports.handleStr = (error, command, reply) => {
   Out.show()
 }
 
-exports.handleObj = (error, command, object) => {
+module.exports.handleObj = (error, command, object) => {
   if (error) {
     return MessageHandler.showErrorOnConsole(error)
   }
