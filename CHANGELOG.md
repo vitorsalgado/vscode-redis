@@ -27,3 +27,6 @@
 * Better repository organization
 * Add better contributing guidelines
 * Better command log output
+
+### 2.0.1
+* Fix default settings import
