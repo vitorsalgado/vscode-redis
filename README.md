@@ -3,7 +3,6 @@
 # VS Code Redis
 #### Extension for Visual Studio Code 
 [![Build Status](https://travis-ci.org/vitorsalgado/vscode-redis.svg?branch=master)](https://travis-ci.org/vitorsalgado/vscode-redis) 
-[![Dependency Status](https://david-dm.org/vitorsalgado/vscode-redis.svg)](https://david-dm.org/vitorsalgado/vscode-redis) 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com) 
 ![Version](https://vsmarketplacebadge.apphb.com/version/vitorsalgado.vscode-redis.svg "Marketplace") 
 ![Installs](https://vsmarketplacebadge.apphb.com/installs/vitorsalgado.vscode-redis.svg "Installs")  
