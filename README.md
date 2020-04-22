@@ -15,7 +15,7 @@ The Plugin on [Visual Studio Marketplace](https://marketplace.visualstudio.com/i
 * Search for **vscode-redis**
 
 ## Usage
-![how to](assets/how-to.gif)     
+![how to](assets/how-to.gif)
 
 ## Features
 * Multiple Redis connections;
