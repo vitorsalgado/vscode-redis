@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "chengjie",
+      "name": "LexCher",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1262026?v=4",
+      "profile": "https://github.com/chengjie",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "vscode-redis",
+  "projectOwner": "vitorsalgado",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
