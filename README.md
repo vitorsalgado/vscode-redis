@@ -23,7 +23,6 @@ The Plugin on [Visual Studio Marketplace](https://marketplace.visualstudio.com/i
 ## Features
 * Multiple Redis connections;
 * Switch between server connections;
-* Execute any Redis command with `Redis: Execute Command`
 * "Command Palette" supported Redis commands:
     * `info`
     * `get`
