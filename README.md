@@ -72,7 +72,7 @@ See [Changelog](CHANGELOG.md).
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-# Versioning
+## Versioning
 We use **[Semantic Versioning](https://semver.org/)** for versioning. For the versions available, see the tags on this repository.
 
 ## License
