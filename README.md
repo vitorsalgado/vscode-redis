@@ -1,4 +1,7 @@
 <a href="https://marketplace.visualstudio.com/items?itemName=vitorsalgado.vscode-redis"><img src="assets/icon.png" width="180px" align="right" /></a>
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # VS Code Redis
 #### Extension for Visual Studio Code 
@@ -74,3 +77,23 @@ We use **[Semantic Versioning](https://semver.org/)** for versioning. For the ve
 
 ## License
 This project is available under MIT License. See [LICENSE](LICENSE).
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/chengjie"><img src="https://avatars2.githubusercontent.com/u/1262026?v=4" width="100px;" alt=""/><br /><sub><b>LexCher</b></sub></a><br /><a href="https://github.com/vitorsalgado/vscode-redis/commits?author=chengjie" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/zerosandones"><img src="https://avatars3.githubusercontent.com/u/1217057?v=4" width="100px;" alt=""/><br /><sub><b>Dave Glendenning</b></sub></a><br /><a href="https://github.com/vitorsalgado/vscode-redis/commits?author=zerosandones" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

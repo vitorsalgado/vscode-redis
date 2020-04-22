@@ -1,0 +1,33 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "chengjie",
+      "name": "LexCher",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1262026?v=4",
+      "profile": "https://github.com/chengjie",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "zerosandones",
+      "name": "Dave Glendenning",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1217057?v=4",
+      "profile": "https://github.com/zerosandones",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "vscode-redis",
+  "projectOwner": "vitorsalgado",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
