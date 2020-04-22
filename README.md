@@ -1,19 +1,24 @@
-# VS Code Redis
-### Extension for Visual Studio Code 
-[![Build Status](https://travis-ci.org/vitorsalgado/vscode-redis.svg?branch=master)](https://travis-ci.org/vitorsalgado/vscode-redis)
-[![Dependency Status](https://david-dm.org/vitorsalgado/vscode-redis.svg)](https://david-dm.org/vitorsalgado/vscode-redis)
-![Version](https://vsmarketplacebadge.apphb.com/version/vitorsalgado.vscode-redis.svg "Marketplace")
-![Installs](https://vsmarketplacebadge.apphb.com/installs/vitorsalgado.vscode-redis.svg "Installs")
+<a href="https://marketplace.visualstudio.com/items?itemName=vitorsalgado.vscode-redis"><img src="assets/icon.png" width="180px" align="right" /></a>
 
-Adds common Redis commands to VS Code Command Palette
+# VS Code Redis
+#### Extension for Visual Studio Code 
+[![Build Status](https://travis-ci.org/vitorsalgado/vscode-redis.svg?branch=master)](https://travis-ci.org/vitorsalgado/vscode-redis) 
+[![Dependency Status](https://david-dm.org/vitorsalgado/vscode-redis.svg)](https://david-dm.org/vitorsalgado/vscode-redis) 
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com) 
+![Version](https://vsmarketplacebadge.apphb.com/version/vitorsalgado.vscode-redis.svg "Marketplace") 
+![Installs](https://vsmarketplacebadge.apphb.com/installs/vitorsalgado.vscode-redis.svg "Installs")  
+Adds common Redis commands to VS Code Command Palette.
 
 ## Install
+The Plugin on [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=vitorsalgado.vscode-redis).
 * Press `Ctrl + Shift + P`
 * Pick  `Extensions: Install Extension`
 * Search for **vscode-redis**
 
-## Features
+## Usage
+![how to](assets/how-to.gif)     
 
+## Features
 * Multiple Redis connections;
 * Switch between server connections;
 * Execute any Redis command with `Redis: Execute Command`
@@ -40,7 +45,6 @@ Adds common Redis commands to VS Code Command Palette
     * `ltrim`
 
 ## Optional Extension Settings
-
 You can configure multiple Redis connections on your workspace. 
 First, place a file named "redis.json" in .vscode folder. Open "redis.json" and edit it following the sample below:
 ```
@@ -48,24 +52,26 @@ First, place a file named "redis.json" in .vscode folder. Open "redis.json" and 
     "databases": [
         {
             "name": "local",
-            "url": "http://localhost:6379"
+            "url": "redis://localhost:6379"
         },
         {
             "name": "production",
-            "addr": "http://production-address:9091",
-            "pwd": "super_secret_password"
+            "url": "rediss://production-address:9091",
+            "password": "super_secret_password"
         }
     ]
 }
 ```
-
 Execute the command `Redis: Reload Configuration` to load the servers listed in configuration file.
 
-## Usage
-![how use](https://github.com/vitorsalgado/vscode-redis/raw/master/how-to.gif)
+## Changelog
+See [Changelog](CHANGELOG.md).
 
-## Release Notes
-https://github.com/vitorsalgado/vscode-redis/blob/master/release-notes.md
+## Contributing
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+# Versioning
+We use **[Semantic Versioning](https://semver.org/)** for versioning. For the versions available, see the tags on this repository.
 
 ## License
-MIT © [vitorsalgado](https://github.com/vitorsalgado)
+This project is available under MIT License. See [LICENSE](LICENSE).

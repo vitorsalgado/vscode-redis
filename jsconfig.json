@@ -1,10 +1,13 @@
 {
-    "compilerOptions": {
-        "target": "ES6",
-        "module": "commonjs",
-        "noLib": true
-    },
-    "exclude": [
-        "node_modules"
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "checkJs": false,
+    "lib": [
+      "es6"
     ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }
